@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHARINGAN OFFICIAL </title>
+    <style>
+        /* Universal Settings */
+        body {
+            background: #0a0a0a;
+            color: #00ffdd;
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Video Styling */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 600px;
+            padding: 25px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 20px #00ffdd;
+            color: #ffffff;
+            z-index: 1;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #ff0044, #ffdd00, #39ff14, #00ffdd) 1;
+        }
+
+        /* Logo Styling */
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            animation: pulseLogo 2s infinite alternate;
+        }
+
+        /* Logo Pulse Animation */
+        @keyframes pulseLogo {
+            0%, 100% { box-shadow: 0 0 10px #00ffdd, 0 0 20px #00ffdd; }
+            50% { box-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14; }
+        }
+
+        /* Server Connection Animation */
+        .connection-status {
+            font-size: 14px;
+            color: #00ffdd;
+            margin-bottom: 15px;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: serverConnection 4s linear infinite;
+        }
+
+        @keyframes serverConnection {
+            0% { content: "Connecting to API..."; }
+            25% { content: "Fetching data..."; }
+            50% { content: "Encrypting data..."; }
+            75% { content: "Building response..."; }
+            100% { content: "Connection secured!"; }
+        }
+
+        /* Title */
+        .title {
+            font-size: 28px;
+            color: #00ffdd;
+            text-shadow: 0 0 10px #00ffdd;
+            margin-bottom: 10px;
+        }
+
+        /* Period Table Styling */
+        .period-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            color: #ffffff;
+            font-size: 18px;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #ff0044, #ffdd00, #39ff14, #00ffdd) 1;
+            box-shadow: 0 0 10px #00ffdd;
+        }
+
+        .period-table th, .period-table td {
+            padding: 10px;
+            border: none;
+            text-align: center;
+        }
+
+        .period-table th {
+            background: rgba(20, 20, 20, 0.9);
+            color: #ff0044;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .period-table td {
+            background: #1a1a1a;
+        }
+
+        /* Result Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            z-index: 10;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00ffdd;
+            text-align: center;
+            color: #00ffdd;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #ff0044, #ffdd00, #39ff14, #00ffdd) 1;
+            animation: pulsePopup 1.5s infinite alternate;
+        }
+
+        /* Popup Pulse Animation */
+        @keyframes pulsePopup {
+            0% { box-shadow: 0 0 20px #00ffdd, 0 0 30px #39ff14; }
+            50% { box-shadow: 0 0 25px #ffdd00, 0 0 40px #ff0044; }
+        }
+
+        .popup h2 {
+            font-size: 22px;
+            color: #1e90ff;
+            text-shadow: 0 0 5px #00ffdd;
+            margin-bottom: 12px;
+        }
+
+        .popup p {
+            font-size: 18px;
+        }
+
+        /* Close Button */
+        .close-btn {
+            font-size: 16px;
+            color: #00ffdd;
+            background: transparent;
+            border: 2px solid #00ffdd;
+            padding: 6px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #00ffdd;
+            color: #121212;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="/mnt/data/pinterest_1731357290064095992.mp4" type="video/mp4">
+    </video>
+
+    <!-- Container for Prediction Details -->
+    <div class="container">
+        <!-- Logo -->
+        <img src="images/logo.png" alt="Logo" class="logo">
+
+        <!-- Server Connection Status -->
+        <div class="connection-status">Connecting to API...</div>
+
+        <!-- Title -->
+        <div class="title">SHARINGAN OFFICIAL  </div>
+
+        <!-- Period Number Table -->
+        <table class="period-table">
+            <tr>
+                <th>Period Number</th>
+            </tr>
+            <tr>
+                <td id="period1m">Loading...</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Popup for Result -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h2>Result</h2>
+            <p id="resultPopupText">SMALL</p>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const resultsPattern = ["SMALL", "BIG", "SMALL", "BIG", "SMALL", "SMALL", "BIG", "SMALL", "BIG"];
+        let periodElement = document.getElementById("period1m");
+        let resultPopupText = document.getElementById("resultPopupText");
+
+        function updatePeriod() {
+            const now = new Date();
+            const totalMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+            const periodNumber = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}1000${10001 + totalMinutes}`;
+            periodElement.textContent = periodNumber;
+
+            // Show the result once per period
+            const result = resultsPattern[currentIndex % resultsPattern.length];
+            resultPopupText.textContent = result;
+            currentIndex++;
+
+            // Show result popup automatically on period change
+            showResult();
+        }
+
+        // Show result popup
+        function showResult() {
+            document.getElementById("popupOverlay").classList.add("show");
+        }
+
+        // Close result popup
+        function closePopup() {
+            document.getElementById("popupOverlay").classList.remove("show");
+        }
+
+        // Update period every minute
+        setInterval(updatePeriod, 60000);
+        updatePeriod();  // Initial call to set the period immediately
+    </script>
+</body>
+</html>
